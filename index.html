@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="icon" href="./dist/images/icon.png"/>
+          <link rel="shortcut icon" href="./dist/images/icon.png"/>
+          <title>CSV to JSON Converter Online - Simple, Fast &amp; Secure</title>
+          <meta name="description" content="Convert CSV to JSON Online for Free. The Tool is Simple, Fast and Secure."/>
+          <meta name="og:title" content="CSV to JSON Converter Online"/>
+          <meta name="og:description" content="Convert CSV to JSON Online for Free. The Tool is Simple, Fast and Secure."/>
+          <meta name="og:image" content="./dist/images/icon-200x200.png"/>
+          <link rel="stylesheet" href="https://irahulsaini.github.io/dist/css/bootstrap.min.css"/>
+          <script type="text/javascript">
+               var csvtojson = '';
+          </script>
+     </head>
+     <body>
+          <header>
+               <div class="py-3 bg-primary text-white">
+                    <div class="container d-flex align-items-center">
+                         <h1 class="h4">CSV to JSON Convert</h1>
+                         <div><span class="small ms-2">v1.0.1</span></div>
+                    </div>
+               </div>
+          </header>
+          <section class="bg-light py-4">
+               <div class="container">
+                    <form onsubmit="return submit_form(this,output_data)" class="form-tool py-4 p-3 shadow-sm mb-4 bg-white" method="post" enctype="multipart/form-data" action="https://www.irahulsaini.com/api/csvtojson">
+                         <div class="mb-3">
+                              <label for="csvfile" class="fw-bold form-label">Select CSV File</label>
+                              <input required class="form-control" name="csv" type="file" id="csvfile" accept=".csv">
+                         </div>
+                         <button type="submit" class="btn btn-primary">Convert CSV</button>
+                         <button type="button" class="btn btn-primary collapse" id="btn-download">Download CSV</button>
+                         <div class="response"></div>
+                         <div class="collapse results mt-3" id="results">
+                              <div class="mb-2">
+                                   <label>Preview (10 Rows):</label>
+                                   <textarea rows="10" class="form-control response"></textarea>
+                              </div>
+                         </div>
+                    </form>
+               </div>
+               <div class="container">
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>What is CSV and JSON?</h6>
+                         <p>
+                              <u>CSV:</u> A CSV (comma-separated values) file is a text file that has a specific format which allows data to be saved in a table structured format.<br/>
+                              <u>JSON:</u> JSON stands for JavaScript Object Notation, JSON is a text format for storing and transporting data, JSON is "self-describing" and easy to understand
+                         </p>
+                    </div>
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>What is CSV to JSON Convert?</h6>
+                         <p>The tool simply convert all csv file data into JSON format and it can be used in various programming languages.</p>
+                    </div>
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>How it Works?</h6>
+                         <p>Simply, Select CSV file above and it will automatically start the CSV to JSON Converting Process. You can also click on Convert button to start process if not started automatically.</p>
+                    </div>
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>Is data secure with Tool?</h6>
+                         <p>Your data 100% safe with this tool we stored your file to convert data only and delete the file immediately after complete the process.</p>
+                    </div>
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>Is it Safe?</h6>
+                         <p>Of Course, The tool is 100% safe to use.</p>
+                    </div>
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>How data Proceed by CSV to JSON Converter?</h6>
+                         <ol class="mb-0">
+                              <li>Your File sent to Server.</li>
+                              <li>Server Accept and Validate it</li>
+                              <li>Start the Converting Process.</li>
+                              <li>Server sent back converted data.</li>
+                              <li>Click on Download to Get Your JSON file</li>
+                              <li>That's it.</li>
+                         </ol>
+                    </div>
+                    <div class="bg-white p-3 mb-3 shadow-sm border-primary border-start">
+                         <h6>What happened to Uploaded files?</h6>
+                         <p>It will delete immediately after the converting CSV to JSON.</p>
+                    </div>
+               </div>
+          </section>
+          <footer>
+               <div class="bg-dark py-3">
+                    <div class="container">
+                         <div class="text-center text-muted">
+                              Developed by <a class="text-muted" href="https://www.irahulsaini.com" target="_blank">Rahul Saini</a> | <a class="text-muted" href="https://www.irahulsaini.com/tools" target="_blank">More Tools</a>
+                         </div>
+                         <p class="small text-center text-muted">
+                              <small>
+                              <strong>Disclaimer:</strong>
+                              We don't take any kind of responsibilities to loss your data while converting to JSON file.
+                              </small>
+                         </p>
+                    </div>
+               </div>
+          </footer>
+          <script src="https://irahulsaini.github.io/dist/js/bootstrap.min.js"></script>
+          <script src="https://irahulsaini.github.io/dist/js/jquery-3.6.1.min.js"></script>
+          <script src="https://irahulsaini.github.io/dist/js/functions.js"></script>
+          <script type="text/javascript">
+               function output_data(data,form){
+                 console.log(data);
+                 $('.response').val(JSON.stringify(data.preview));
+                 
+                 csvtojson = JSON.stringify(data.response);
+                 $('#results').collapse('show');
+                 $('#btn-download').collapse('show');
+               }
+               $('.form-tool #csvfile').on('change',function(){
+                 $('.form-tool').trigger('submit');
+               });
+               $('#btn-download').on('click',function(e){
+                 e.preventDefault();
+                 $(this).attr('disabled',1)
+                 save_file(csvtojson,'csvtojson.json');
+               })
+          </script>
+     </body>
+</html>
